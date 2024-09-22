@@ -135,32 +135,10 @@ Copy code
 }
 Testing
 
-Unit Tests
-Run Tests with Coverage
-bash
-Copy code
-pytest --cov=.
-Expected Output:
-diff
-Copy code
-============================= test session starts =============================
-platform darwin -- Python 3.11.2, pytest-8.3.3, py-1.x.x, pluggy-1.5.0
-rootdir: /path/to/jwks-server
-plugins: cov-5.0.0
-collected 3 items
 
-test_app.py ...                                                       [100%]
+<img width="1440" alt="Screenshot 2024-09-22 at 4 40 09 PM" src="https://github.com/user-attachments/assets/5e44cc8a-9d3e-4385-8429-ede740c49373">
 
------------ coverage: platform darwin, python 3.11.2-final-0 -----------
-Name              Stmts   Miss  Cover
--------------------------------------
-app.py               25      1   96%
-key_manager.py       70      7   90%
-test_app.py          25      2   92%
--------------------------------------
-TOTAL               120      10   92%
 
-============================== 3 passed in 0.32s ==============================
 View Coverage Report
 bash
 Copy code
@@ -183,6 +161,8 @@ Received token:
 <your_valid_jwt_token_here>
 
 Fetching JWKS...
+
+<img width="1440" alt="Screenshot 2024-09-22 at 4 40 16 PM" src="https://github.com/user-attachments/assets/5e0fca9d-35e4-4281-bb1c-7fd4c53a3a03">
 
 Decoding and verifying token...
 Token is valid. Decoded payload:
