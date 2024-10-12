@@ -219,13 +219,4 @@ Contact
 
 For any questions or concerns, please open an issue or contact the repository owner.
 
-Thank you for using the JWKS Server!
-
-
-
-
-
-
-
-
-ChatGPT can make mistakes. Check important info.
+Thank you for using JWK server.
