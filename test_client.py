@@ -1,19 +1,52 @@
 import requests
 
-def main():
-    url = "http://127.0.0.1:8080/auth"  # Change if your server is running on a different URL or port
-    
-    # Attempt to send a POST request to /auth with no body
-    response = requests.post(url)
+BASE_URL = "http://127.0.0.1:8080"
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        print("Success! Received JWT:")
-        print(response.json())  # Assuming the response is in JSON format
-    else:
-        print(f"Failed to retrieve JWT. Status code: {response.status_code}")
-        print("Response:", response.text)
+def test_auth_token():
+    """Test the /auth endpoint for a valid token generation."""
+    try:
+        response = requests.post(f"{BASE_URL}/auth")
+        if response.status_code == 200:
+            print("test_auth_token: PASS")
+            print("Received Token:", response.json().get("token"))
+        else:
+            print("test_auth_token: FAIL")
+            print("Status Code:", response.status_code, "| Response:", response.json())
+    except Exception as e:
+        print("test_auth_token: ERROR", e)
+
+def test_auth_expired_token():
+    """Test the /auth endpoint with the 'expired' parameter for an expired token."""
+    try:
+        response = requests.post(f"{BASE_URL}/auth?expired=true")
+        if response.status_code == 200 or response.status_code == 404:
+            print("test_auth_expired_token: PASS")
+            if response.status_code == 200:
+                print("Received Expired Token:", response.json().get("token"))
+            else:
+                print("Message:", response.json().get("message"))
+        else:
+            print("test_auth_expired_token: FAIL")
+            print("Status Code:", response.status_code, "| Response:", response.json())
+    except Exception as e:
+        print("test_auth_expired_token: ERROR", e)
+
+def test_jwks():
+    """Test the /.well-known/jwks.json endpoint for retrieving the JWKS keys."""
+    try:
+        response = requests.get(f"{BASE_URL}/.well-known/jwks.json")
+        if response.status_code == 200:
+            print("test_jwks: PASS")
+            print("JWKS Response:", response.json())
+        else:
+            print("test_jwks: FAIL")
+            print("Status Code:", response.status_code, "| Response:", response.json())
+    except Exception as e:
+        print("test_jwks: ERROR", e)
 
 if __name__ == "__main__":
-    main()
+    print("Running external tests...\n")
+    test_auth_token()
+    test_auth_expired_token()
+    test_jwks()
 
